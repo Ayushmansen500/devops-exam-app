@@ -11,8 +11,8 @@
         --primary-light: #5472d3;     /* Soft Blue Tint */
         --text: #e3f2fd;              /* Light text for contrast */
         --text-light: #bbdefb;        /* Muted light-blue text */
-        --bg: #0a192f;                /* Dark background */
-        --card-bg: #112240;           /* Dark card background */
+        --bg: #102a43;                /* Lighter Blue Background Base */
+        --card-bg: rgba(15, 40, 70, 0.85); /* Semi-transparent bluish cards */
         --correct: #00c853;
         --incorrect: #ff5252;
         --warning: #ffb300;
@@ -21,11 +21,13 @@
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: var(--bg);
+        background: linear-gradient(135deg, #1a355d 0%, #153a6a 40%, #1b4b8a 100%);
         color: var(--text);
         line-height: 1.6;
         margin: 0;
         padding: 0;
+        min-height: 100vh;
+        background-attachment: fixed;
     }
 
     .exam-container {
@@ -44,7 +46,7 @@
     .exam-title {
         font-size: 1.8rem;
         font-weight: 700;
-        color: var(--primary-light);
+        color: var(--text);
         margin-bottom: 0.5rem;
         text-shadow: 0 0 10px rgba(84, 114, 211, 0.4);
     }
@@ -134,13 +136,13 @@
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
-        background: #0f203a;
+        background: rgba(20, 45, 80, 0.8);
         color: var(--text-light);
     }
 
     .option-label:hover {
         border-color: var(--primary-light);
-        background: #112f5f;
+        background: #1b3b6f;
         color: #ffffff;
     }
 
@@ -165,7 +167,7 @@
 
     .option-label.selected {
         border-color: var(--primary);
-        background: #112f5f;
+        background: #163b6b;
         color: #fff;
     }
 
@@ -255,8 +257,8 @@
         transform: translateY(0);
     }
 </style>
-
 </head>
+
 <body>
     <div class="time-up-alert" id="time-up-alert">
         <i class="fas fa-exclamation-triangle"></i> Time's up! Your exam is being submitted automatically.
@@ -312,7 +314,6 @@
                                     required
                                     onchange="selectOption(this)"
                                 >
-                                <span class="custom-radio"></span>
                                 {{ opt }}
                             </label>
                         {% endfor %}
@@ -372,20 +373,15 @@
             document.getElementById('progress-bar').style.width = `${progressPercent}%`;
         }
         
-        // Handle option selection
         function selectOption(radio) {
-            // Remove selected class from all options in this question
             const questionId = radio.name.split('_')[1];
             document.querySelectorAll(`input[name="question_${questionId}"]`).forEach(input => {
                 input.parentElement.classList.remove('selected');
             });
-            
-            // Add selected class to chosen option
             radio.parentElement.classList.add('selected');
             updateProgress();
         }
         
-        // Initialize progress bar
         updateProgress();
     </script>
 </body>

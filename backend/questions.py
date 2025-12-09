@@ -1,4 +1,4 @@
-replace these question and answers with docker , terraform , kuberntes , git , jenkins questions without chaging the format -->questions = [
+questions = [
     {
         "question": "What is the primary purpose of Jenkins in a CI/CD pipeline?",
         "options": ["Container orchestration", "Automating builds, tests, and deployments", "Static code analysis", "Artifact repository management"],
